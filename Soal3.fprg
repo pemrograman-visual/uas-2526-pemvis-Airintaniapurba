@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="SOAL3"/>
+        <attribute name="authors" value="Airin Tania"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-12-17 04:25:06 PM"/>
+        <attribute name="created" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MjE6MTkgUE07MzM1OQ=="/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MjQ6MzAgUE07NTtBaXJpbiBUYW5pYTtMQVBUT1AtNDJWQlIzSFY7MjAyNS0xMi0xNzswNDoyMDoxNCBQTTtpcGIuZnByZzs3NzMw"/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MjU6MDYgUE07MTszNDY3"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="jmlPenghuni, i, j, jmlPerangkat, watt, totalPribadi, totalKamar" type="Integer" array="False" size=""/>
+            <declare name="nama" type="String" array="False" size=""/>
+            <output expression="&quot;Masukkan Jumlah Penghuni:&quot;" newline="True"/>
+            <input variable="jmlPenghuni"/>
+            <assign variable="totalKamar" expression="0"/>
+            <for variable="i" start="1" end="jmlPenghuni" direction="inc" step="1">
+                <output expression="&quot;Nama Penghuni ke-&quot; &amp; i &amp; &quot;:&quot;" newline="True"/>
+                <input variable="nama"/>
+                <output expression="&quot;Jumlah Perangkat (Max 10):&quot;" newline="True"/>
+                <input variable="jmlPerangkat"/>
+                <assign variable="totalPribadi" expression="0"/>
+                <for variable="j" start="1" end="jmlPerangkat" direction="inc" step="1">
+                    <assign variable="watt" expression="getValidWatt(j)"/>
+                    <assign variable="totalPribadi" expression="totalPribadi + watt"/>
+                </for>
+                <output expression="nama &amp; &quot; = &quot; &amp; totalPribadi &amp; &quot; wh&quot;" newline="True"/>
+                <assign variable="totalKamar" expression="totalKamar + totalPribadi"/>
+            </for>
+            <output expression="&quot;---------------------------------&quot;" newline="True"/>
+            <output expression="&quot;Total konsumsi kamar = &quot; &amp; totalKamar &amp; &quot; wh&quot;" newline="True"/>
+            <call expression="checkSafety(totalKamar)"/>
+        </body>
+    </function>
+    <function name="checkSafety" type="None" variable="">
+        <parameters>
+            <parameter name="total" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <if expression="total &gt; 10000">
+                <then>
+                    <output expression="&quot;PERINGATAN: Konsumsi melebihi batas (10.000 wh)!&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;Konsumsi masih dalam batas wajar.&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="getValidWatt" type="Integer" variable="w">
+        <parameters>
+            <parameter name="urutan" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="w" type="Integer" array="False" size=""/>
+            <declare name="valid" type="Boolean" array="False" size=""/>
+            <assign variable="valid" expression="False"/>
+            <while expression="valid == False">
+                <output expression="&quot;Masukkan konsumsi (wh) perangkat ke-&quot; &amp; urutan &amp; &quot;:&quot;" newline="True"/>
+                <input variable="w"/>
+                <if expression="w &gt;= 0">
+                    <then>
+                        <assign variable="valid" expression="True"/>
+                    </then>
+                    <else>
+                        <output expression="&quot;INVALID: Konsumsi tidak boleh negatif!&quot;" newline="True"/>
+                    </else>
+                </if>
+            </while>
+        </body>
+    </function>
+</flowgorithm>

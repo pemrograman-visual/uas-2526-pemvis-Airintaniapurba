@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="SOAL1"/>
+        <attribute name="authors" value="Airin Tania"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-12-17 04:04:29 PM"/>
+        <attribute name="created" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MDI6MDIgUE07MzM1MA=="/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MDM6MTkgUE07MjtBaXJpbiBUYW5pYTtMQVBUT1AtNDJWQlIzSFY7MjAyNS0xMi0xNzswNDowMTowMiBQTTt1aWlpLmZwcmc7Nzg0NA=="/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MDM6MzIgUE07MTtBaXJpbiBUYW5pYTtMQVBUT1AtNDJWQlIzSFY7MjAyNS0xMi0xNzswNDowMjozOCBQTTt1aWlpLmZwcmc7Nzg0OA=="/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MDQ6MjkgUE07MTszNDY5"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="N, i, val, total, maxVal, minVal, count4" type="Integer" array="False" size=""/>
+            <declare name="avg" type="Real" array="False" size=""/>
+            <declare name="ratings" type="Integer" array="True" size="20"/>
+            <output expression="&quot;Masukkan Jumlah Reviewer (Maks 20):&quot;" newline="True"/>
+            <input variable="N"/>
+            <if expression="N &gt; 20">
+                <then>
+                    <output expression="&quot;Error: Maksimal 20 reviewer!&quot;" newline="True"/>
+                </then>
+                <else>
+                    <assign variable="total" expression="0"/>
+                    <assign variable="maxVal" expression="-1"/>
+                    <assign variable="minVal" expression="6"/>
+                    <assign variable="count4" expression="0"/>
+                    <for variable="i" start="0" end="N - 1" direction="inc" step="1">
+                        <assign variable="val" expression="getValidRating()"/>
+                        <assign variable="ratings[i]" expression="val"/>
+                        <assign variable="total" expression="total + val"/>
+                        <if expression="val &gt; maxVal">
+                            <then>
+                                <assign variable="maxVal" expression="val"/>
+                            </then>
+                            <else/>
+                        </if>
+                        <if expression="val &lt; minVal">
+                            <then>
+                                <assign variable="minVal" expression="val"/>
+                            </then>
+                            <else/>
+                        </if>
+                        <if expression="val &gt;= 4">
+                            <then>
+                                <assign variable="count4" expression="count4 + 1"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </for>
+                    <assign variable="avg" expression="total / N"/>
+                    <output expression="&quot;Rata-rata: &quot; &amp; avg" newline="True"/>
+                    <output expression="&quot;Tertinggi: &quot; &amp; maxVal" newline="True"/>
+                    <output expression="&quot;Terendah: &quot; &amp; minVal" newline="True"/>
+                    <output expression="&quot;Rating &gt;= 4: &quot; &amp; count4 &amp; &quot; orang&quot;" newline="True"/>
+                    <if expression="avg &lt; 3">
+                        <then>
+                            <output expression="&quot;Kantin perlu evaluasi manajemen!&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <if expression="avg &lt; 4">
+                                <then>
+                                    <output expression="&quot;Kondisi cukup, masih perlu peningkatan.&quot;" newline="True"/>
+                                </then>
+                                <else>
+                                    <output expression="&quot;Kantin dalam kondisi baik.&quot;" newline="True"/>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="getValidRating" type="Integer" variable="rate">
+        <parameters/>
+        <body>
+            <declare name="rate" type="Integer" array="False" size=""/>
+            <declare name="valid" type="Boolean" array="False" size=""/>
+            <assign variable="valid" expression="False"/>
+            <while expression="valid == False">
+                <output expression="&quot;Masukkan Rating (1-5):&quot;" newline="True"/>
+                <input variable="rate"/>
+                <if expression="rate &gt;= 1 &amp;&amp; rate &lt;= 5">
+                    <then>
+                        <assign variable="valid" expression="True"/>
+                    </then>
+                    <else>
+                        <output expression="&quot;INVALID: Input harus 1-5&quot;" newline="True"/>
+                    </else>
+                </if>
+            </while>
+        </body>
+    </function>
+</flowgorithm>

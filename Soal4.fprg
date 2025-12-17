@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Soal4"/>
+        <attribute name="authors" value="Airin Tania"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-12-17 04:33:42 PM"/>
+        <attribute name="created" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MzE6MDcgUE07MzM1Nw=="/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MzM6MDQgUE07MztBaXJpbiBUYW5pYTtMQVBUT1AtNDJWQlIzSFY7MjAyNS0xMi0xNzswNDoyOToxMyBQTTtPWEZPUkQuZnByZzs3ODg4"/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MzM6NDIgUE07MTszNDY2"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, totalShift, maxShift, minShift, tempShift" type="Integer" array="False" size=""/>
+            <declare name="avg" type="Real" array="False" size=""/>
+            <declare name="names" type="String" array="True" size="8"/>
+            <declare name="shifts" type="Integer" array="True" size="8"/>
+            <declare name="maxName, minName" type="String" array="False" size=""/>
+            <output expression="&quot;Masukkan Jumlah Asisten (Maks 8):&quot;" newline="True"/>
+            <input variable="n"/>
+            <if expression="n &gt; 8">
+                <then>
+                    <output expression="&quot;Error: Maksimal 8 asisten!&quot;" newline="True"/>
+                </then>
+                <else>
+                    <assign variable="totalShift" expression="0"/>
+                    <assign variable="maxShift" expression="-1"/>
+                    <assign variable="minShift" expression="8"/>
+                    <assign variable="maxName" expression="&quot;&quot;"/>
+                    <assign variable="minName" expression="&quot;&quot;"/>
+                    <for variable="i" start="0" end="n - 1" direction="inc" step="1">
+                        <output expression="&quot;Nama Asisten ke-&quot; &amp; (i+1) &amp; &quot;:&quot;" newline="True"/>
+                        <input variable="names[i]"/>
+                        <assign variable="tempShift" expression="getValidShift()"/>
+                        <assign variable="shifts[i]" expression="tempShift"/>
+                        <assign variable="totalShift" expression="totalShift + tempShift"/>
+                        <if expression="tempShift &gt; maxShift">
+                            <then>
+                                <assign variable="maxShift" expression="tempShift"/>
+                                <assign variable="maxName" expression="names[i]"/>
+                            </then>
+                            <else/>
+                        </if>
+                        <if expression="tempShift &lt; minShift">
+                            <then>
+                                <assign variable="minShift" expression="tempShift"/>
+                                <assign variable="minName" expression="names[i]"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </for>
+                    <assign variable="avg" expression="totalShift / n"/>
+                    <output expression="&quot;-----------------------&quot;" newline="True"/>
+                    <output expression="&quot;Daftar Shift:&quot;" newline="True"/>
+                    <for variable="i" start="0" end="n - 1" direction="inc" step="1">
+                        <output expression="names[i] &amp; &quot; = &quot; &amp; shifts[i]" newline="True"/>
+                    </for>
+                    <output expression="&quot;-----------------------&quot;" newline="True"/>
+                    <output expression="&quot;Total Shift = &quot; &amp; totalShift" newline="True"/>
+                    <output expression="&quot;Rata-rata = &quot; &amp; avg" newline="True"/>
+                    <output expression="&quot;Shift Terbanyak: &quot; &amp; maxName &amp; &quot; (&quot; &amp; maxShift &amp; &quot;)&quot;" newline="True"/>
+                    <output expression="&quot;Shift Tersedikit: &quot; &amp; minName &amp; &quot; (&quot; &amp; minShift &amp; &quot;)&quot;" newline="True"/>
+                    <if expression="avg &lt; 3">
+                        <then>
+                            <output expression="&quot;Distribusi shift tidak merata, beberapa asisten terbebani.&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <if expression="avg &gt;= 5">
+                                <then>
+                                    <output expression="&quot;Shift terlalu padat.&quot;" newline="True"/>
+                                </then>
+                                <else>
+                                    <output expression="&quot;Distribusi shift normal.&quot;" newline="True"/>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="getValidShift" type="Integer" variable="s">
+        <parameters/>
+        <body>
+            <declare name="s" type="Integer" array="False" size=""/>
+            <declare name="valid" type="Boolean" array="False" size=""/>
+            <assign variable="valid" expression="False"/>
+            <while expression="valid == False">
+                <output expression="&quot;Masukkan Jumlah Shift (0-7):&quot;" newline="True"/>
+                <input variable="s"/>
+                <if expression="s &gt;= 0 &amp;&amp; s &lt;= 7">
+                    <then>
+                        <assign variable="valid" expression="True"/>
+                    </then>
+                    <else>
+                        <output expression="&quot;INVALID: Shift harus 0 sampai 7!&quot;" newline="True"/>
+                    </else>
+                </if>
+            </while>
+        </body>
+    </function>
+</flowgorithm>

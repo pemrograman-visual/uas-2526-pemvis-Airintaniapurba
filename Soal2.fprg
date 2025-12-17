@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="Soal22"/>
+        <attribute name="authors" value="Airin Tania"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-12-17 04:17:46 PM"/>
+        <attribute name="created" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MTA6MjEgUE07MzM1MA=="/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MTU6NDkgUE07NztBaXJpbiBUYW5pYTtMQVBUT1AtNDJWQlIzSFY7MjAyNS0xMi0xNzswNDowOTo1NCBQTTtpdGVyYS5mcHJnOzc5NzE="/>
+        <attribute name="edited" value="QWlyaW4gVGFuaWE7TEFQVE9QLTQyVkJSM0hWOzIwMjUtMTItMTc7MDQ6MTc6NDYgUE07MTszNDcy"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i" type="Integer" array="False" size=""/>
+            <declare name="nama" type="String" array="True" size="10"/>
+            <declare name="stokAwal" type="Integer" array="True" size="10"/>
+            <declare name="terjual" type="Integer" array="True" size="10"/>
+            <declare name="sisa" type="Integer" array="True" size="10"/>
+            <declare name="status" type="String" array="True" size="10"/>
+            <output expression="&quot;Jumlah Barang (Max 10):&quot;" newline="True"/>
+            <input variable="n"/>
+            <if expression="n &gt; 10">
+                <then>
+                    <output expression="&quot;Max 10 barang!&quot;" newline="True"/>
+                </then>
+                <else>
+                    <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                        <output expression="&quot;Nama Barang &quot; &amp; (i+1) &amp; &quot;:&quot;" newline="True"/>
+                        <input variable="nama[i]"/>
+                        <assign variable="stokAwal[i]" expression="getValidStock()"/>
+                        <assign variable="terjual[i]" expression="getValidSold(stokAwal[i])"/>
+                        <assign variable="sisa[i]" expression="stokAwal[i] - terjual[i]"/>
+                        <assign variable="status[i]" expression="getStatus(sisa[i])"/>
+                    </for>
+                    <output expression="&quot;Nama | Awal | Jual | Sisa | Status&quot;" newline="True"/>
+                    <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                        <output expression="nama[i] &amp; &quot; | &quot; &amp; stokAwal[i] &amp; &quot; | &quot; &amp; terjual[i] &amp; &quot; | &quot; &amp; sisa[i] &amp; &quot; | &quot; &amp; status[i]" newline="True"/>
+                    </for>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="getStatus" type="String" variable="res">
+        <parameters>
+            <parameter name="s" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="res" type="String" array="False" size=""/>
+            <if expression="s == 0">
+                <then>
+                    <assign variable="res" expression="&quot;Habis, segera restock!&quot;"/>
+                </then>
+                <else>
+                    <if expression="s &lt; 5">
+                        <then>
+                            <assign variable="res" expression="&quot;Stok menipis.&quot;"/>
+                        </then>
+                        <else>
+                            <assign variable="res" expression="&quot;Stok aman.&quot;"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="getValidSold" type="Integer" variable="j">
+        <parameters>
+            <parameter name="maxS" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="ok" type="Boolean" array="False" size=""/>
+            <assign variable="ok" expression="False"/>
+            <while expression="ok == False">
+                <output expression="&quot;Jumlah Terjual (Max &quot; &amp; maxS &amp; &quot;):&quot;" newline="True"/>
+                <input variable="j"/>
+                <if expression="j &gt;= 0 &amp;&amp; j &lt;= maxS">
+                    <then>
+                        <assign variable="ok" expression="True"/>
+                    </then>
+                    <else>
+                        <output expression="&quot;INVALID!&quot;" newline="True"/>
+                    </else>
+                </if>
+            </while>
+        </body>
+    </function>
+    <function name="getValidStock" type="Integer" variable="s">
+        <parameters/>
+        <body>
+            <declare name="s" type="Integer" array="False" size=""/>
+            <declare name="ok" type="Boolean" array="False" size=""/>
+            <assign variable="ok" expression="False"/>
+            <while expression="ok == False">
+                <output expression="&quot;Stok Awal (&gt;=0):&quot;" newline="True"/>
+                <input variable="s"/>
+                <if expression="s &gt;= 0">
+                    <then>
+                        <assign variable="ok" expression="True"/>
+                    </then>
+                    <else>
+                        <output expression="&quot;INVALID!&quot;" newline="True"/>
+                    </else>
+                </if>
+            </while>
+        </body>
+    </function>
+</flowgorithm>
