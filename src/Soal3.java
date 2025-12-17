@@ -1,7 +1,9 @@
+//Airin Tania-12S25046
+//Boas Hutahean-12S25005
 import java.util.*;
 import java.lang.Math;
 
-public class JavaApplication {
+public class Soal3{
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
